@@ -6,8 +6,8 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 class WebThread1 : Thread() {
-    private lateinit var carts1 :  ArrayList<Cart>
-    private lateinit var products1 : ArrayList<Product>
+    private var carts1 :  ArrayList<Cart> = ArrayList<Cart>()
+    private var products1 : ArrayList<Product> = ArrayList<Product>()
 
     override fun run() {
         super.run()
@@ -16,11 +16,11 @@ class WebThread1 : Thread() {
         var httpsURLConnection = url.openConnection() as HttpsURLConnection
         httpsURLConnection.connect()
 
-        Log.e("tag", httpsURLConnection.url.toString())
-        Log.e("tag", httpsURLConnection.contentType)
-        Log.e("tag",httpsURLConnection.contentEncoding)
-        Log.e("tag", httpsURLConnection.requestMethod)
-        Log.e("tag",httpsURLConnection.responseMessage)
+//        Log.e("tag", httpsURLConnection.url.toString())
+//        Log.e("tag", httpsURLConnection.contentType)
+//        Log.e("tag",httpsURLConnection.contentEncoding)
+//        Log.e("tag", httpsURLConnection.requestMethod)
+//        Log.e("tag",httpsURLConnection.responseMessage)
 
         var inputStream = httpsURLConnection.inputStream
 
