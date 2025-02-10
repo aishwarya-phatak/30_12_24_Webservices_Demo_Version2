@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.json.JSONArray
@@ -27,12 +28,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
+        WebThread(MessageHandler()).execute()
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView(){
+        recyclerViewForUsers = findViewById(R.id.recyclerViewForUsers)
+        usersAdapter = UsersAdapter(users)
+        recyclerViewForUsers.adapter = usersAdapter
+        recyclerViewForUsers.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.VERTICAL,
+            false)
     }
 
     inner class MessageHandler : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            users = msg.obj as ArrayList<User>
+            var usersResponse = msg.obj as ArrayList<User>
+
+            //refer to users array from outer class i.e. MainActivity
+            this@MainActivity.users.addAll(usersResponse)
+            usersAdapter.notifyDataSetChanged()     //imp
         }
     }
 }

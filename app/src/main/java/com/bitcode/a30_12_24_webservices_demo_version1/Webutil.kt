@@ -42,7 +42,7 @@ class WebUtil {
             val jsonArrayOfUsers = responseObject.getJSONArray("data")
             var users : ArrayList<User> = ArrayList<User>()
 
-            for (i in 0..<jsonArrayOfUsers.length()- 1){
+            for (i in 0..<jsonArrayOfUsers.length()){
                 val eachUser = jsonArrayOfUsers.getJSONObject(i)
                 Log.e("tag", "${eachUser.toString()}")
                 val id = eachUser.getInt("id")
